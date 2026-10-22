@@ -1,0 +1,934 @@
+/* 
+=========================================
+   Estilos Principales - Absolut Mobile
+========================================= 
+*/
+
+/* --- 1. Variables & Reset --- */
+:root {
+    /* Paleta de colores */
+    --color-principal: #0057FF;
+    --color-principal-oscuro: #021f33;
+    --color-principal-clarito: #6ab4e3;
+    
+    /* Configuración dinámica del logo para responsive */
+    --logo-width: 30vw;
+    --logo-margin-bottom: 20px;
+}
+
+/* Ocultamos la barra de scroll nativa para un look más limpio (ideal por si tenés animaciones de scroll) */
+html {
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    overflow-x: hidden;
+}
+
+html::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Space Grotesk", sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050d1a; /* Fondo oscuro base para la web */
+    overflow-x: hidden;
+}
+
+/* --- 2. Elementos Flotantes (Cursor, Particles y Dots Nav) --- */
+
+/* Fondo de nodos conectados */
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
+
+/* Cursor customizado - Punto interno */
+.cursor-punto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: var(--color-principal);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Cursor customizado - Anillo externo */
+.cursor-anillo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--color-principal);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: transform 0.05s ease, opacity 0.3s ease;
+}
+
+/* Ocultar el cursor nativo solo si el dispositivo soporta hover preciso (mouse, no touch) */
+@media (pointer: fine) {
+    body.custom-cursor-active, body.custom-cursor-active * {
+        cursor: none;
+    }
+}
+
+/* Menú lateral de puntos para scrollear fácil */
+.nav-dots {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+}
+
+.dot {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(128, 128, 128, 0.8);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.activo {
+    background: var(--color-principal);
+    border-color: var(--color-principal);
+    box-shadow: 0 0 8px var(--color-principal);
+}
+
+/* Tooltip al pasar el mouse por los puntos del menú */
+.dot::before {
+    content: attr(data-label);
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px 8px;
+    background: rgba(5, 13, 26, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.2s ease;
+}
+
+.dot:hover::before {
+    opacity: 1;
+}
+
+/* --- 3. Sección Hero --- */
+.header-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: 3;
+    pointer-events: none; /* Permite interactuar con el background de particles por debajo */
+}
+
+/* Excepciones del pointer-events para los elementos clickeables */
+.header-botones a,
+.chevron,
+.header-img {
+    pointer-events: all;
+}
+
+.header-img {
+    display: flex;
+    justify-content: center;
+    width: var(--logo-width);
+    margin-bottom: var(--logo-margin-bottom);
+    transition: width 0.3s ease;
+}
+
+.header-img img {
+    width: 100%;
+    height: auto; 
+    object-fit: contain;
+}
+
+.header-titulo {
+    margin-top: 30px;
+    color: #ffffff;
+    font-size: 70px;
+}
+
+.header-titulo span {
+    color: var(--color-principal);
+}
+
+.header-text {
+    width: 40%;
+    text-align: center;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+/* Botones Call To Action del inicio */
+.header-botones {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 400px;
+    height: 60px;
+}
+
+.header-botones a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 47%;
+    height: 100%;
+    margin-top: 60px;
+    border-radius: 2px;
+    text-decoration: none;
+}
+
+.boton-mas {
+    background-color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+    color: #ffffff;
+    transition: all .2s ease-in-out;
+}
+
+.boton-mas:hover {
+    background-color: var(--color-principal-clarito);
+    border-color: var(--color-principal-clarito);
+}
+
+.boton-mas:active, .boton-contacto:active { 
+    opacity: .5; 
+}
+
+.boton-contacto {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    transition: all .2s ease-in-out;
+}
+
+.boton-contacto:hover {
+    background-color: var(--color-principal-clarito);
+    border-color: var(--color-principal-clarito);
+}
+
+/* Animación de la flechita para invitar a scrollear */
+.chevron {
+    position: absolute;
+    bottom: 10px;
+    animation: flotar 2s ease-in-out infinite;
+}
+
+@keyframes flotar {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+/* --- 4. Sección Servicios --- */
+.servicios-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    min-height: 80vh;
+    padding: 80px 0;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+}
+
+.servicios-contenedor h2 {
+    display: flex;
+    align-items: center;
+    width: 68%;
+    margin-bottom: 40px;
+    gap: 16px;
+    font-size: 65px;
+}
+
+.servicios-contenedor h2 span {
+    color: var(--color-principal);
+}
+
+/* Línea decorativa al lado del título de Servicios */
+.servicios-contenedor h2::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    margin-top: 15px;
+    background: var(--color-principal);
+}
+
+/* Grid layout para las cards de los servicios */
+.servicios-list-contenedor {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    width: 68%;
+    gap: 24px;
+}
+
+.servicio {
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    height: auto;
+    padding: 28px 24px;
+    background: #ffffff;
+    border-radius: 2px;
+    outline: 2px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: outline 0.3s ease;
+}
+
+.servicio img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 15px;
+    object-fit: contain;
+    transform-origin: center;
+    transition: transform 0.3s ease;
+}
+
+.servicio h3 {
+    margin: 0;
+    color: #0d1b2a;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.servicio p {
+    margin: 10px 0 0 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.servicio:hover {
+    outline: 2px solid var(--color-principal);
+}
+
+.servicio:hover img {
+    transform: scale(1.2); /* Pequeño zoom al ícono para dar feedback visual */
+}
+
+/* --- 5. Sección Nosotros --- */
+.nosotros-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 70vh;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.nosotros-izquierda-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    height: 100%;
+}
+
+.nosotros-izquierda-contenedor h2 {
+    width: 90%;
+    height: 10%;
+    margin: 30px 0;
+    text-align: left;
+    font-size: 65px;
+}
+
+.nosotros-izquierda-contenedor h2 span {
+    color: var(--color-principal);
+}
+
+.nosotros-izquierda-contenedor p {
+    width: 90%;
+    text-align: left;
+    color: #4b5563; 
+    font-weight: 300;
+}
+
+.nosotros-izquierda-contenedor .politica-calidad {
+    margin: 15px 0px;
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.nosotros-izquierda-contenedor .politica-calidad span {
+    color: var(--color-principal);
+}
+
+/* Lista con checkmarks personalizados */
+.check-list {
+    width: 90%;
+    list-style: none;
+    text-align: left;
+}
+
+.check-list li {
+    margin-bottom: 10px;
+    color: #4b5563; 
+    font-size: 13px;
+    font-weight: 300;
+    transform-origin: left center;
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), font-weight 0.25s ease;
+}
+
+.check-list li::before {
+    content: "✓";
+    margin-right: 10px;
+    color: var(--color-principal);
+    font-weight: 700;
+}
+
+.check-list li:hover {
+    color: #000; 
+    font-weight: 500;
+    transform: translateX(6px) scale(1.077); /* Pequeño pop hacia la derecha al hacer hover */
+}
+
+.nosotros-derecha-contenedor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    height: 100%;
+}
+
+.nosotros-logo-grande {
+    width: 80%;
+    max-width: 380px;
+    height: auto;
+    margin-bottom: 30px;
+    object-fit: contain;
+}
+
+.nosotros-derecha-contenedor .frase-director {
+    width: 80%;
+    text-align: center;
+    color: var(--color-principal);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* --- 6. Sección Clientes (Carrusel Infinito) --- */
+#clientes {
+    width: 100vw;
+    height: 40vh;
+    padding: 80px 0;
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+}
+
+.clientes-titulo {
+    margin-bottom: 80px;
+    text-align: center;
+    color: #4b5563; 
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+}
+
+.clientes-titulo span {
+    color: var(--color-principal)
+}
+
+.carrusel-contenedor {
+    position: relative;
+    overflow: hidden;
+}
+
+.carrusel-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+}
+
+/* Animación del track entero (la variable --scroll-width se suele setear por JS) */
+.carrusel-track.animado {
+    animation: scroll-carrusel linear infinite;
+}
+
+@keyframes scroll-carrusel {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(var(--scroll-width)); }
+}
+
+.logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    padding: 0 48px;
+    flex-shrink: 0;
+}
+
+.logo-item img {
+    width: auto;
+    max-width: 160px;
+    height: 100px;
+    object-fit: contain;
+    opacity: .7; 
+    filter: grayscale(100%);
+    transition: all .2s ease-in-out;
+}
+
+.logo-item img:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+/* --- 7. Sección Contacto --- */
+.contacto-contenedor {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 70vh;
+    padding: 100px 10%;
+    gap: 80px;
+    position: relative;
+    background-color: #fff;
+}
+
+.contacto-izquierda {
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    gap: 24px;
+}
+
+.contacto-izquierda h2 {
+    margin: 0;
+    color: #0d1b2a;
+    font-size: 52px;
+    font-weight: 700;
+}
+
+.contacto-izquierda .contacto-subtitulo {
+    margin: 0;
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.contacto-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    gap: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+/* Pintamos los iconos SVG con un filtro css para no tener que importar múltiples imágenes */
+.info-item img {
+    width: 22px;
+    height: 22px;
+    margin-top: 2px;
+    filter: invert(23%) sepia(97%) saturate(2000%) hue-rotate(210deg);
+}
+
+.info-item p {
+    margin: 0;
+    color: #374151;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.contacto-redes {
+    display: flex;
+    margin-top: 8px;
+    gap: 12px;
+}
+
+.red-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.red-social img {
+    width: 25px;
+    height: 25px;
+    filter: invert(23%) sepia(97%) saturate(2000%) hue-rotate(210deg);
+    transition: transform 0.3s ease;
+}
+
+.red-social:hover {
+    background-color: rgba(0, 87, 255, 0.05);
+    border-color: var(--color-principal);
+}
+
+.red-social:hover img {
+    transform: scale(1.15);
+}
+
+/* Formulario */
+.contacto-derecha {
+    width: 40%;
+}
+
+#contacto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-grupo label {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.form-grupo input,
+.form-grupo select,
+.form-grupo textarea {
+    width: 100%;
+    padding: 12px 16px;
+    background: #f9fafb;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    color: #0d1b2a;
+    font-family: inherit;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-grupo input:focus,
+.form-grupo select:focus,
+.form-grupo textarea:focus {
+    background-color: #fff;
+    border-color: var(--color-principal);
+    box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.08);
+}
+
+.form-grupo textarea {
+    min-height: 140px;
+    resize: none;
+    overflow-y: auto;
+}
+
+.btn-enviar {
+    width: 100%;
+    margin-top: 4px;
+    padding: 16px;
+    background-color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+    border-radius: 8px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-enviar:hover {
+    background-color: var(--color-principal-clarito);
+    border-color: var(--color-principal-clarito);
+    box-shadow: 0 4px 20px rgba(106, 180, 227, 0.3);
+    transform: translateY(-1px);
+}
+
+.btn-enviar:active {
+    opacity: 0.5;
+    transform: translateY(0);
+}
+
+.btn-enviar:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Mensajes de feedback del form */
+.form-success, .form-error {
+    margin: 0;
+    text-align: center;
+    font-size: 15px;
+}
+
+.form-success { color: #16a34a; }
+.form-error { color: #dc2626; }
+
+/* --- 8. Footer --- */
+.footer {
+    width: 100vw;
+    padding: 24px 10%;
+    position: relative;
+    background-color: #0d1b2a;
+}
+
+.footer-contenido {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-logo img {
+    width: auto;
+    height: 70px;
+}
+
+.footer-centro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.footer-centro p {
+    margin: 0;
+    color: #9ca3af; 
+    font-size: 13px;
+}
+
+.footer-centro .footer-creditos {
+    font-size: 12px;
+}
+
+.footer-centro .footer-creditos a {
+    color: var(--color-principal);
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.footer-centro .footer-creditos a:hover {
+    opacity: 0.8;
+}
+
+.footer-redes {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.footer-redes a {
+    display: inline-block;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.footer-redes a:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.footer-redes img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+/* --- 9. Responsive / Media Queries --- */
+
+/* Breakpoint para Tablets */
+@media (max-width: 1024px) {
+    :root {
+        --logo-width: 65vw;
+    }
+}
+
+/* Breakpoint para Móviles */
+@media (max-width: 600px) {
+    :root {
+        --logo-width: 80vw;
+        --logo-margin-bottom: 15px;
+    }
+}
+
+/* Menú móvil base - oculto en desktop */
+.menu-hamburguesa, .menu-movil {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    /* Forzamos el ancho para evitar scrolls horizontales raros en celulares */
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Reseteamos los anchos fijos de las secciones para que se adapten al 100% de la pantalla */
+    .header-contenedor,
+    .nosotros-contenedor,
+    .servicios-contenedor,
+    #clientes,
+    .contacto-contenedor,
+    .footer {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Ocultamos los cursores custom y el nav lateral que no sirven ni se ven bien en touch (mobile) */
+    .cursor-punto, .cursor-anillo, .nav-dots {
+        display: none !important;
+    }
+
+    /* Botón hamburguesa */
+    .menu-hamburguesa {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        position: fixed;
+        top: 25px;
+        right: 25px;
+        z-index: 10001;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .menu-hamburguesa span {
+        width: 35px;
+        height: 3px;
+        background: var(--color-principal);
+        border-radius: 2px;
+        transition: 0.4s ease;
+    }
+
+    /* Animación de la cruz (X) en el botón menú */
+    .menu-hamburguesa.activo span:nth-child(1) { transform: translateY(9px) rotate(45deg); background: white; }
+    .menu-hamburguesa.activo span:nth-child(2) { opacity: 0; }
+    .menu-hamburguesa.activo span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); background: white; }
+
+    /* Overlay del menú mobile (escondido fuera de pantalla hacia la derecha por defecto) */
+    .menu-movil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        gap: 40px;
+        z-index: 10000;
+        background: rgba(5, 13, 26, 0.98);
+        transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .menu-movil.activo { right: 0; }
+
+    .menu-movil a {
+        color: white;
+        font-size: 28px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .menu-movil a:hover { color: var(--color-principal); }
+    
+    /* Ajustes Hero Mobile */
+    .header-contenedor {
+        min-height: 100vh;
+        height: auto;
+        padding: 100px 20px 60px 20px;
+    }
+    .header-titulo { margin-top: 15px; text-align: center; font-size: 38px; }
+    .header-text { width: 100%; font-size: 15px; }
+    .header-botones { flex-direction: column; width: 100%; height: auto; margin-top: 40px; gap: 15px; }
+    .header-botones a { width: 100%; margin-top: 0; padding: 16px 0; }
+
+    /* Ajustes Nosotros Mobile */
+    .nosotros-contenedor { 
+        flex-direction: column; 
+        height: auto;
+        padding: 60px 20px; 
+        gap: 40px; 
+    }
+    .nosotros-izquierda-contenedor, .nosotros-derecha-contenedor { width: 100%; }
+    .nosotros-izquierda-contenedor h2 { width: 100%; text-align: center; font-size: 38px; }
+
+    /* Ajustes Servicios Mobile */
+    .servicios-contenedor { padding: 60px 20px; }
+    .servicios-contenedor h2 { 
+        display: block;
+        width: 100%; 
+        margin-bottom: 30px;
+        text-align: center; 
+        font-size: 28px; 
+        white-space: nowrap; 
+    }
+    .servicios-contenedor h2::after { display: none; }
+    .servicios-list-contenedor { width: 100%; grid-template-columns: 1fr; }
+
+    /* Ajustes Contacto Mobile */
+    .contacto-contenedor { 
+        flex-direction: column; 
+        height: auto; 
+        padding: 60px 20px; 
+        gap: 40px; 
+    }
+    .contacto-izquierda, .contacto-derecha { width: 100%; }
+    .contacto-izquierda h2 { text-align: center; font-size: 38px; }
+    .contacto-info { align-items: center; text-align: center; }
+    .contacto-redes { justify-content: center; }
+    .form-fila { grid-template-columns: 1fr; gap: 20px; }
+
+    /* Ajustes Footer & Clientes Mobile */
+    #clientes { height: auto; padding: 60px 0; }
+    .footer { padding: 40px 20px; }
+    .footer-contenido { flex-direction: column; text-align: center; gap: 30px; }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por contactarnos! | Absolut Mobile</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/imgs/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        body {
+            background-color: #ffffff;
+            color: #0d1b2a;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .gracias-contenedor {
+            max-width: 600px;
+            width: 100%;
+            animation: aparecer 0.8s ease-out;
+        }
+
+        .icono-exito {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(0, 87, 255, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px auto;
+        }
+
+        .icono-exito svg {
+            width: 40px;
+            height: 40px;
+            stroke: #0057FF;
+            stroke-width: 2.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0d1b2a;
+            line-height: 1.2;
+        }
+
+        h1 span {
+            color: #0057FF;
+        }
+
+        p {
+            font-size: 18px;
+            color: #6b7280;
+            font-weight: 300;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .redireccion {
+            font-size: 14px;
+            color: #9ca3af;
+            line-height: 1.6;
+        }
+
+        .contador {
+            font-weight: 700;
+            color: #0057FF;
+        }
+
+        .enlace-volver {
+            color: #0057FF;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s ease;
+            margin-left: 4px;
+        }
+
+        .enlace-volver:hover {
+            opacity: 0.8;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsividad para Tablets (pantallas medianas) */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 40px;
+            }
+            p {
+                font-size: 17px;
+            }
+            .icono-exito {
+                width: 70px;
+                height: 70px;
+                margin-bottom: 24px;
+            }
+            .icono-exito svg {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+        /* Responsividad para Móviles (pantallas chicas) */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 32px;
+            }
+            p {
+                font-size: 15px;
+                margin-bottom: 24px;
+            }
+            .redireccion {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gracias-contenedor">
+        <div class="icono-exito">
+            <svg viewBox="0 0 24 24">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+        <h1>Gracias por <span>Contactarnos</span></h1>
+        <p>Nos contactaremos con usted apenas podamos para brindarle la mejor solución.</p>
+        <div class="redireccion">
+            Serás redirigido automáticamente en <span class="contador" id="contador">5</span> segundos.
+            O podés <a href="index.html" class="enlace-volver">volver ahora</a>.
+        </div>
+    </div>
+
+    <script>
+        let segundos = 5;
+        const contadorElemento = document.getElementById('contador');
+        
+        const intervalo = setInterval(() => {
+            segundos--;
+            contadorElemento.textContent = segundos;
+            if (segundos <= 0) {
+                clearInterval(intervalo);
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
